@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { authClient } from "../lib/auth-client";
+import { MdAdsClick } from "react-icons/md";
+import { TbHandClick } from "react-icons/tb";
 
 // Routes shown when the user is logged out (minimum 3 required)
 const LOGGED_OUT_ROUTES = [
@@ -23,6 +26,9 @@ const Navbar = () => {
   // Swap this out for your real auth state (e.g. from a session hook/context).
   // Kept as local state here so the component is runnable/testable on its own.
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  console.log(user);
 
   const routes = isLoggedIn ? LOGGED_IN_ROUTES : LOGGED_OUT_ROUTES;
 
@@ -56,7 +62,19 @@ const Navbar = () => {
                 <Link href={route.href}>{route.label}</Link>
               </li>
             ))}
-            {!isLoggedIn && (
+            {user ? (
+              <>
+                <li>
+                  <p>sourav</p>
+                  <button
+                    className="btn btn-warning"
+                    onClick={() => authClient.signOut()}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
               <>
                 <li className="mt-2 border-t border-base-200 pt-2">
                   <Link href="/signIn">SignIn</Link>
@@ -88,19 +106,13 @@ const Navbar = () => {
 
       {/* ---------- Right: auth actions ---------- */}
       <div className="navbar-end gap-2">
-        {isLoggedIn ? (
+        {user ? (
           <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-9 rounded-full">
-                <img
-                  alt="User avatar"
-                  src="https://api.dicebear.com/7.x/initials/svg?seed=User"
-                />
-              </div>
+            <div tabIndex={0} role="button" className="avatar">
+              <h1 className="font-bold cursor-pointer">
+                wellcome , {user?.name}
+              </h1>
+              <TbHandClick size={25} className="mx-2" />
             </div>
             <ul
               tabIndex={0}
@@ -113,7 +125,7 @@ const Navbar = () => {
                 <Link href="/settings">Settings</Link>
               </li>
               <li>
-                <button onClick={() => setIsLoggedIn(false)}>Log out</button>
+                <button onClick={() => authClient.signOut()}>Log out</button>
               </li>
             </ul>
           </div>
@@ -132,12 +144,12 @@ const Navbar = () => {
         )}
 
         {/* Demo-only toggle — remove once real auth is wired up */}
-        <button
+        {/* <button
           className="btn btn-outline btn-xs ml-2 hidden md:inline-flex"
           onClick={() => setIsLoggedIn((prev) => !prev)}
         >
           {isLoggedIn ? "Simulate logout" : "Simulate login"}
-        </button>
+        </button> */}
       </div>
     </div>
   );
