@@ -64,7 +64,6 @@ export default function SignUpPage() {
         name: name.trim(),
         email,
         password,
-        // role,
       });
       if (!data) {
         setError(
