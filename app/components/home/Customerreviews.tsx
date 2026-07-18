@@ -1,5 +1,5 @@
 import { REVIEWS } from "@/app/lib/mock-data";
-import { FiStar } from "react-icons/fi";
+import { Star } from "lucide-react";
 
 export default function CustomerReviews() {
   return (
@@ -25,7 +25,7 @@ export default function CustomerReviews() {
             >
               <div className="flex gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <FiStar
+                  <Star
                     key={i}
                     size={14}
                     className={

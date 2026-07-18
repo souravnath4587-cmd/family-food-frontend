@@ -1,36 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { authClient } from "../lib/auth-client";
-import { MdAdsClick } from "react-icons/md";
 import { TbHandClick } from "react-icons/tb";
-
-// Routes shown when the user is logged out (minimum 3 required)
-const LOGGED_OUT_ROUTES = [
-  { href: "/", label: "Home" },
-  { href: "/products", label: "Products" },
-  { href: "/blogs", label: "Blogs" },
-];
-
-// Routes shown when the user is logged in (minimum 5 required)
-const LOGGED_IN_ROUTES = [
-  { href: "/", label: "Home" },
-  { href: "/products", label: "Products" },
-  { href: "/blogs", label: "Blogs" },
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/profile", label: "Profile" },
-];
 
 const Navbar = () => {
   // Swap this out for your real auth state (e.g. from a session hook/context).
   // Kept as local state here so the component is runnable/testable on its own.
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { data: session } = authClient.useSession();
   const user = session?.user;
-  console.log(user);
 
-  const routes = isLoggedIn ? LOGGED_IN_ROUTES : LOGGED_OUT_ROUTES;
+  // Routes shown when the user is logged out (minimum 3 required)
+  const LOGGED_OUT_ROUTES = [
+    { href: "/", label: "Home" },
+    { href: "/products", label: "Products" },
+    { href: "/blogs", label: "Blogs" },
+  ];
+
+  // Routes shown when the user is logged in (minimum 5 required)
+  const LOGGED_IN_ROUTES = [
+    { href: "/", label: "Home" },
+    { href: "/products", label: "Products" },
+    { href: "/blogs", label: "Blogs" },
+    {
+      href: `/dashboard${user?.role === "admin" ? "/admin/overView" : "/user/userMenu"}`,
+      label: "Dashboard",
+    },
+    { href: "/profile", label: "Profile" },
+  ];
+
+  const routes = user ? LOGGED_IN_ROUTES : LOGGED_OUT_ROUTES;
 
   return (
     <div className="navbar bg-base-100 shadow-sm sticky top-0 z-50 w-full px-4 md:px-8">
