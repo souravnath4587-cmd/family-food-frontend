@@ -30,7 +30,7 @@ export default function UsersTable({
   }
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-[#E4DCC8] bg-white p-6">
+    <div className="overflow-x-auto rounded-2xl border border-[#E4DCC8] bg-white ">
       <table className="table">
         <thead>
           <tr className="text-xs uppercase tracking-wide text-[#7A7368]">

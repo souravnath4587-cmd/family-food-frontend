@@ -1,7 +1,12 @@
 import React from "react";
+import AdminProductsPage from "./AdminProductPage";
 
 const page = () => {
-  return <div>this is products page.</div>;
+  return (
+    <div>
+      <AdminProductsPage />
+    </div>
+  );
 };
 
 export default page;
