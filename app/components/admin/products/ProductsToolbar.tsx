@@ -83,10 +83,11 @@ export default function ProductsTable({
                   {currencyFormatter.format(product.price)}
                 </td>
                 <td className="px-6 py-3.5 text-sm text-gray-300">
-                  {product.stock}
+                  {product.stockQuantity}
                 </td>
                 <td className="px-6 py-3.5">
-                  <StatusBadge status={product.status} />
+                  {/* <StatusBadge status={product.spicyLevel} /> */}
+                  <p className="capitalize">{product.spicyLevel}</p>
                 </td>
                 {/* <td className="px-6 py-3.5 text-sm text-gray-400">
                   {dateFormatter.format(new Date(product.createdAt))}

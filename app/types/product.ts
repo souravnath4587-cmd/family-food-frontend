@@ -8,9 +8,11 @@ export interface Product {
   weight: string; // e.g. "250g"
   rating: number; // 0–5
   reviewCount: number;
-  spiceLevel: 1 | 2 | 3; // 1 mild – 3 spicy
+  // spiceLevel: 1 | 2 | 3; // 1 mild – 3 spicy
+  spicyLevel: string;
   category: string;
   isBestSeller?: boolean;
+  stockQuantity: string;
 }
 
 export interface Category {

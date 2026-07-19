@@ -58,7 +58,7 @@ export default function ViewProductPage({ id }: ViewProductPageProps) {
 
   async function handleDelete() {
     await deleteProduct(id);
-    router.push("/admin/products");
+    router.push("/dashboard/admin/products");
   }
 
   if (isLoading) {
@@ -74,7 +74,7 @@ export default function ViewProductPage({ id }: ViewProductPageProps) {
           </p>
           <div className="mt-4 flex justify-center gap-3">
             <button
-              onClick={() => router.push("/admin/products")}
+              onClick={() => router.push("/dashboard/admin/products")}
               className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-gray-200 transition-colors hover:bg-white/10"
             >
               Back to Products
@@ -102,7 +102,7 @@ export default function ViewProductPage({ id }: ViewProductPageProps) {
         {/* Breadcrumb / back */}
         <div className="flex items-center justify-between">
           <button
-            onClick={() => router.push("/admin/products")}
+            onClick={() => router.push("/dashboard/admin/products")}
             className="flex items-center gap-2 text-sm text-gray-400 transition-colors hover:text-white"
           >
             <FiArrowLeft className="h-4 w-4" />
@@ -111,7 +111,9 @@ export default function ViewProductPage({ id }: ViewProductPageProps) {
 
           <div className="flex items-center gap-2">
             <button
-              onClick={() => router.push(`/admin/products/${product._id}/edit`)}
+              onClick={() =>
+                router.push(`/dashboard/admin/products/${product._id}/edit`)
+              }
               className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3.5 py-2 text-sm font-medium text-gray-200 transition-colors duration-150 hover:border-amber-500/40 hover:bg-amber-500/10 hover:text-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/40"
             >
               <FiEdit2 className="h-4 w-4" />
