@@ -1,11 +1,36 @@
 "use client";
 
 import Link from "next/link";
-import { useProducts } from "@/app/context/Productscontext";
+// import { useProducts } from "@/app/context/Productscontext";
 import ProductGrid from "../ui/ProductGrid";
+import { getProducts } from "@/app/lib/api/Products";
+import { useEffect, useState } from "react";
+import { Product } from "@/app/types/Product";
 
 export default function FeaturedProducts() {
-  const { products, isLoading, error } = useProducts();
+  // const { products, isLoading, error } = useProducts();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  async function loadProducts() {
+    try {
+      setIsLoading(true);
+      setLoadError(null);
+      const data = await getProducts();
+      setProducts(data);
+    } catch (err) {
+      setLoadError(
+        err instanceof Error ? err.message : "Failed to load products.",
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    loadProducts();
+  }, []);
 
   return (
     <section className="w-full bg-white px-6 py-14">
@@ -34,7 +59,7 @@ export default function FeaturedProducts() {
           <ProductGrid
             products={products.slice(0, 8)}
             isLoading={isLoading}
-            error={error}
+            error={loadError}
             skeletonCount={8}
           />
         </div>

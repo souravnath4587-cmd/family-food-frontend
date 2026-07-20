@@ -4,6 +4,8 @@ import Link from "next/link";
 import { FiHeart, FiStar } from "react-icons/fi";
 import { Product } from "@/app/types/Product";
 import { useFavorites } from "@/app/context/FavoritesContext";
+import { GiChiliPepper } from "react-icons/gi";
+import Image from "next/image";
 
 const SPICE_LABEL: Record<Product["spiceLevel"], string> = {
   1: "Mild",
@@ -19,9 +21,11 @@ export default function ProductCard({ product }: { product: Product }) {
     <div className="flex h-full w-full flex-col overflow-hidden rounded-2xl border border-[#E4DCC8] bg-white">
       {/* image */}
       <div className="relative h-44 w-full shrink-0 overflow-hidden bg-[#F5EEDD]">
-        <img
-          src={product.image}
-          alt={product.title}
+        <Image
+          src={product?.image}
+          alt={product.slug}
+          width={400}
+          height={400}
           className="h-full w-full object-cover"
           loading="lazy"
         />
@@ -59,13 +63,17 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="mt-3 flex items-center gap-3 text-xs text-[#7A7368]">
           <span className="flex items-center gap-1 text-[#20261F]">
             <FiStar className="fill-[#E3A73E] text-[#E3A73E]" size={13} />
-            {product.rating.toFixed(1)}
+            {product.rating?.toFixed(1)}
             <span className="text-[#7A7368]">({product.reviewCount})</span>
           </span>
           <span aria-hidden="true">·</span>
           <span>{product.weight}</span>
           <span aria-hidden="true">·</span>
-          <span>{SPICE_LABEL[product.spiceLevel]}</span>
+          <span className="flex flex-row gap-2 capitalize">
+            {/* {SPICE_LABEL[product.spicyLevel]} */}
+            <GiChiliPepper />
+            {product.spicyLevel}
+          </span>
         </div>
 
         {/* price */}

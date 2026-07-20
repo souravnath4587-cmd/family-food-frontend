@@ -92,6 +92,24 @@ export default function AddProductPage() {
       setError("Fill in name, category, price, stock, and weight to continue.");
       return;
     }
+    const uploadedImages = await Promise.all(
+      images.map(async (img) => {
+        const formData = new FormData();
+        formData.append("image", img.file);
+
+        const res = await fetch(
+          `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMAGE_UPLOAD_API}`,
+          {
+            method: "POST",
+            body: formData,
+          },
+        );
+
+        const data = await res.json();
+
+        return data.data.url;
+      }),
+    );
 
     const ingredients = ingredientsRaw
       .split("\n")
@@ -103,7 +121,7 @@ export default function AddProductPage() {
       slug: slug || slugify(name),
       description,
       shortDescription,
-      images, // TODO: upload each file to your image host first, store the resulting URLs
+      images: uploadedImages,
       category,
       price: Number(price),
       discountPrice: discountPrice ? Number(discountPrice) : undefined,

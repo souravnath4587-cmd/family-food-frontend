@@ -1,8 +1,8 @@
 export interface Product {
   id: string;
-  title: string;
+  slug: string;
   description: string;
-  image: string;
+  images: string;
   price: number;
   compareAtPrice?: number;
   weight: string; // e.g. "250g"

@@ -30,10 +30,10 @@ export default function UsersTable({
   }
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-[#E4DCC8] bg-white ">
+    <div className="overflow-x-auto rounded-2xl border border-white/5 bg-[#18181B] text-white ">
       <table className="table">
-        <thead>
-          <tr className="text-xs uppercase tracking-wide text-[#7A7368]">
+        <thead className="bg-[#1D1D21]">
+          <tr className="text-xs uppercase tracking-wide text-white">
             <th>User</th>
             <th>ID</th>
             <th>Email</th>
@@ -58,7 +58,7 @@ export default function UsersTable({
                       alt=""
                       className="h-8 w-8 rounded-full"
                     />
-                    <span className="font-medium text-[#20261F]">
+                    <span className="font-medium text-white">
                       {user.name}
                       {isSelf && (
                         <span className="ml-1.5 text-xs font-normal text-[#7A7368]">
@@ -68,19 +68,16 @@ export default function UsersTable({
                     </span>
                   </div>
                 </td>
-                <td
-                  className="font-mono text-xs text-[#7A7368]"
-                  title={user._id}
-                >
+                <td className="font-mono text-xs text-white" title={user._id}>
                   {user._id.slice(0, 8)}…
                 </td>
-                <td className="text-[#20261F]">{user.email}</td>
+                <td className="text-white">{user.email}</td>
                 <td>
                   <span
                     className={`rounded-full px-2.5 py-1 text-xs font-medium ${
                       user.role === "admin"
-                        ? "bg-[#274235]/10 text-[#274235]"
-                        : "bg-[#E4DCC8]/60 text-[#7A7368]"
+                        ? "bg-[#274235]/5 text-[#b1b8b4]"
+                        : "bg-[#E4DCC8]/30 text-[#c9b28e]"
                     }`}
                   >
                     {user.role === "admin" ? "Admin" : "User"}
@@ -90,8 +87,8 @@ export default function UsersTable({
                   <span
                     className={`rounded-full px-2.5 py-1 text-xs font-medium ${
                       user.isBlocked
-                        ? "bg-[#D1552C]/10 text-[#8A3418]"
-                        : "bg-[#3F6B52]/10 text-[#2C4A38]"
+                        ? "bg-[#D1552C]/10 text-[#975038]"
+                        : "bg-[#3F6B52]/10 text-[#2d5a3f]"
                     }`}
                   >
                     {user.isBlocked ? "Blocked" : "Active"}
@@ -110,7 +107,7 @@ export default function UsersTable({
                             ? "Remove admin access"
                             : "Make this user an admin"
                       }
-                      className="btn btn-ghost btn-xs gap-1 text-[#274235] disabled:opacity-40"
+                      className="btn btn-ghost btn-xs gap-1 text-white disabled:opacity-40"
                     >
                       <FiShield size={13} />
                       {user.role === "admin" ? "Demote" : "Make admin"}

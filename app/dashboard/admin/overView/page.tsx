@@ -1,7 +1,11 @@
-import React from "react";
+import AdminOverviewPage from "./AdminOverviewPage";
 
 const page = () => {
-  return <div>this is admin overview page.</div>;
+  return (
+    <div>
+      <AdminOverviewPage />
+    </div>
+  );
 };
 
 export default page;
