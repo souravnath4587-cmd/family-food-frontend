@@ -36,7 +36,7 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
         <button
           type="button"
-          onClick={() => toggleFavorite(product.id)}
+          onClick={() => toggleFavorite(product._id)}
           aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
           className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-[#274235] shadow-sm hover:bg-white"
         >
@@ -53,7 +53,7 @@ export default function ProductCard({ product }: { product: Product }) {
           className="line-clamp-1 text-base text-[#20261F]"
           style={{ fontFamily: "var(--font-fraunces)", fontWeight: 600 }}
         >
-          {product.title}
+          {product.name}
         </h3>
         <p className="mt-1 line-clamp-2 text-[13px] leading-snug text-[#7A7368]">
           {product.description}
@@ -89,7 +89,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
 
         <Link
-          href={`/products/${product.id}`}
+          href={`/products/${product._id}`}
           className="btn mt-4 w-full border-none text-sm text-[#FBF3E7] hover:brightness-105"
           style={{ backgroundColor: "#274235" }}
         >
