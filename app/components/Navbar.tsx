@@ -3,12 +3,35 @@
 import Link from "next/link";
 import { authClient } from "../lib/auth-client";
 import { TbHandClick } from "react-icons/tb";
+import { IoCart } from "react-icons/io5";
+import { getCart } from "../lib/api/cart";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   // Swap this out for your real auth state (e.g. from a session hook/context).
   // Kept as local state here so the component is runnable/testable on its own.
   const { data: session } = authClient.useSession();
   const user = session?.user;
+  const userId = session?.user.id;
+  const [cartItemCount, setCartItemCount] = useState(0);
+
+  useEffect(() => {
+    const fetchCartCount = async () => {
+      try {
+        const cart = await getCart(userId as string);
+
+        setCartItemCount(cart.items?.length ?? 0);
+      } catch (error) {
+        console.error("Failed to fetch cart count:", error);
+
+        setCartItemCount(0);
+      }
+    };
+
+    if (userId) {
+      fetchCartCount();
+    }
+  }, [userId]);
 
   // Routes shown when the user is logged out (minimum 3 required)
   const LOGGED_OUT_ROUTES = [
@@ -34,7 +57,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow-sm sticky top-0 z-50 w-full px-4 md:px-8">
       {/* ---------- Left: mobile menu + brand ---------- */}
-      <div className="navbar-start">
+      <div className="navbar-start ">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -61,10 +84,12 @@ const Navbar = () => {
                 <Link href={route.href}>{route.label}</Link>
               </li>
             ))}
+
             {user ? (
               <>
                 <li>
                   <p>sourav</p>
+
                   <button
                     className="btn btn-warning"
                     onClick={() => authClient.signOut()}
@@ -104,13 +129,14 @@ const Navbar = () => {
       </div>
 
       {/* ---------- Right: auth actions ---------- */}
-      <div className="navbar-end gap-2">
+      <div className="navbar-end gap-2 ">
         {user ? (
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end ">
             <div tabIndex={0} role="button" className="avatar">
               <h1 className="font-bold cursor-pointer">
                 wellcome , {user?.name}
               </h1>
+
               <TbHandClick size={25} className="mx-2" />
             </div>
             <ul
@@ -142,13 +168,15 @@ const Navbar = () => {
           </>
         )}
 
-        {/* Demo-only toggle — remove once real auth is wired up */}
-        {/* <button
-          className="btn btn-outline btn-xs ml-2 hidden md:inline-flex"
-          onClick={() => setIsLoggedIn((prev) => !prev)}
-        >
-          {isLoggedIn ? "Simulate logout" : "Simulate login"}
-        </button> */}
+        <Link href="/cart" className="relative btn btn-secondary btn-sm">
+          {cartItemCount > 0 && (
+            <span className="badge badge-warning absolute -top-2 -right-2">
+              {cartItemCount}
+            </span>
+          )}
+          <IoCart />
+          Cart
+        </Link>
       </div>
     </div>
   );

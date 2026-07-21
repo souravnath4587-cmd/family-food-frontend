@@ -8,18 +8,12 @@ import {
   FiUsers,
 } from "react-icons/fi";
 
-// import { AdminStats } from "@/types/admin-stats";
-// import { getAdminStats } from "@/lib/api/admin-stats";
-// import MetricCard from "@/components/admin/overview/MetricCard";
-// import RecentOrdersTable from "@/components/admin/overview/RecentOrdersTable";
-// import LowStockTable from "@/components/admin/overview/LowStockTable";
-// import OverviewSkeleton from "@/components/admin/overview/OverviewSkeleton";
+
 import { AdminStats } from "@/app/types/admin-stats";
 import { getAdminStats } from "@/app/lib/api/admin-stats";
 import OverviewSkeleton from "@/app/components/admin/overview/Overviewskeleton";
 import MetricCard from "@/app/components/admin/overview/MetricCard";
 import RecentOrdersTable from "@/app/components/admin/overview/Recentorderstable";
-// import LowStockTable from "@/app/components/admin/overview/Lowstocktable";
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",

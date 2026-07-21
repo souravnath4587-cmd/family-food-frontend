@@ -4,7 +4,7 @@ type LayoutProps = {
   children: React.ReactNode;
 };
 
-const MainLayoutPage = ({ children }: LayoutProps) => {
+const CartLayoutPage = ({ children }: LayoutProps) => {
   return (
     <div>
       <Navbar />
@@ -13,4 +13,4 @@ const MainLayoutPage = ({ children }: LayoutProps) => {
   );
 };
 
-export default MainLayoutPage;
+export default CartLayoutPage;

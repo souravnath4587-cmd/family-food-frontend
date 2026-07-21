@@ -21,6 +21,8 @@ import { getProductById } from "@/app/lib/api/Products";
 import QuantitySelector from "./Quantityselector";
 import Image from "next/image";
 import StockBadge from "./Stockbadge";
+import { addToCart } from "@/app/lib/api/cart";
+import { authClient } from "@/app/lib/auth-client";
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -35,10 +37,15 @@ const SPICY_STYLES: Record<string, string> = {
 
 interface ProductDetailPageProps {
   id: string;
+  userId: string;
 }
 
 export default function ProductDetailPage({ id }: ProductDetailPageProps) {
   const router = useRouter();
+  const { data: session } = authClient.useSession();
+
+  const userId = session?.user?.id;
+  console.log(userId);
 
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -104,9 +111,25 @@ export default function ProductDetailPage({ id }: ProductDetailPageProps) {
     SPICY_STYLES[product.spicyLevel?.toLowerCase()] ??
     "bg-white/5 text-gray-300 ring-white/10";
 
-  function handleAddToCart() {
+  async function handleAddToCart() {
     // Wire this up to your actual cart logic (context, Zustand, API, etc.)
-    console.log("Add to cart:", product?._id, "qty:", quantity);
+    console.log("Add to cart:", product?._id, "qty:", quantity, userId);
+    if (!product?._id) {
+      return;
+    }
+
+    try {
+      const data = await addToCart(product._id, quantity, userId as string);
+
+      console.log("Product added to cart:", data);
+
+      // Toast
+      // toast.success("Product added to cart!");
+    } catch (error) {
+      console.error("Add to cart error:", error);
+
+      // toast.error("Failed to add product to cart.");
+    }
   }
 
   return (
