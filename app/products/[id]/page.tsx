@@ -1,9 +1,7 @@
-// import ProductDetailPage from "../../components/products/ProductDetailPage";
-
 import ProductDetailPage from "@/app/components/products/ProductDetailPage";
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; userId: string }>;
 }
 
 export default async function Page({ params }: PageProps) {

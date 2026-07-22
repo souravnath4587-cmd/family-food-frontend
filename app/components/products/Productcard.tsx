@@ -61,8 +61,10 @@ export default function ProductCard({
           // fall back gracefully on load errors instead of
           // requiring every domain to be whitelisted in next.config.
           <Image
-            src={product.image}
-            alt={product?.name}
+            src={
+              product?.image || "https://i.ibb.co.com/WWNvp1Bp/chanachur4.jpg"
+            }
+            alt={product?.name || "chanachur image"}
             width={400}
             height={400}
             loading="lazy"

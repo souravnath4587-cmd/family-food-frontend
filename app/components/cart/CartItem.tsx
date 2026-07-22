@@ -34,8 +34,8 @@ export default function CartItem({
       {/* Product Image */}
       <div className="relative h-28 w-full shrink-0 overflow-hidden rounded-xl bg-zinc-900 sm:h-28 sm:w-28">
         <Image
-          src={item.image}
-          alt={item.name}
+          src={item?.image || "https://i.ibb.co.com/WWNvp1Bp/chanachur4.jpg"}
+          alt={item?.name || "chanachur image"}
           fill
           sizes="112px"
           className="object-cover"

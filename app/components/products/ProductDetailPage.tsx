@@ -45,7 +45,6 @@ export default function ProductDetailPage({ id }: ProductDetailPageProps) {
   const { data: session } = authClient.useSession();
 
   const userId = session?.user?.id;
-  console.log(userId);
 
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);

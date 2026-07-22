@@ -11,7 +11,7 @@ export interface Product {
   category: string;
   price: number;
   discountPrice?: number;
-  stockQuantity?: number;
+  stockQuantity: number;
   stock: number;
   ingredients: string[];
   weight: string;
@@ -19,23 +19,6 @@ export interface Product {
   ageRecommendation: string;
   updatedAt?: string;
 }
-
-// export interface Product {
-//   id: string;
-//   slug: string;
-//   description: string;
-//   images: string;
-//   price: number;
-//   compareAtPrice?: number;
-//   weight: string; // e.g. "250g"
-//   rating: number; // 0–5
-//   reviewCount: number;
-//   // spiceLevel: 1 | 2 | 3; // 1 mild – 3 spicy
-//   spicyLevel: string;
-//   category: string;
-//   isBestSeller?: boolean;
-//   stockQuantity: string;
-// }
 
 export interface Category {
   id: string;

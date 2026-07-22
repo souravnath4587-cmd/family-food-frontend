@@ -2,9 +2,6 @@ import { redirect } from "next/navigation";
 import ShoppingCartPage from "./ShoppingCartPage";
 import { getUserSession } from "../lib/core/session";
 
-// import ShoppingCartPage from "@/components/cart/ShoppingCartPage";
-// import { getUserSession } from "@/lib/auth/getUserSession";
-
 export default async function CartPage() {
   const user = await getUserSession();
 
