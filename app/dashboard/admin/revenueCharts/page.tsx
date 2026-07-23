@@ -1,7 +1,11 @@
-import React from "react";
+import RevenueChart from "./RevenueChart";
 
 const page = () => {
-  return <div>this is revenue page.</div>;
+  return (
+    <div>
+      <RevenueChart />
+    </div>
+  );
 };
 
 export default page;

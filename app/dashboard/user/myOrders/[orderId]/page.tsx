@@ -14,7 +14,6 @@ export default async function OrderDetailsPage({
   params,
 }: OrderDetailsPageProps) {
   const { orderId } = await params;
-  console.log(orderId);
 
   const user = await getUserSession();
 
@@ -23,7 +22,6 @@ export default async function OrderDetailsPage({
   }
 
   const userId = user.id;
-  console.log(userId);
 
   const order = await getOrderById(orderId, userId);
 

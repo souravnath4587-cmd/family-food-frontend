@@ -146,3 +146,24 @@ export async function clearCart(userId: string): Promise<ShoppingCart> {
 
   return result.data;
 }
+
+export async function addToWishlist(userId: string, productId: string) {
+  const res = await fetch(`${API_BASE_URL}/api/wishlist`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userId,
+      productId,
+    }),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || "Failed to add to wishlist");
+  }
+
+  return data;
+}

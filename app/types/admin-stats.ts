@@ -4,16 +4,17 @@ export interface AdminStats {
   totalProducts: number;
   totalUsers: number;
 
-  // Optional trend percentages vs. the previous period.
-  // Leave these off your API response and the cards will just
-  // hide the trend pill instead of breaking.
+  pendingOrders: number;
+  confirmedOrders: number;
+  processingOrders: number;
+  shippedOrders: number;
+  deliveredOrders: number;
+  cancelledOrders: number;
+
   revenueChangePercent?: number;
   ordersChangePercent?: number;
   productsChangePercent?: number;
   usersChangePercent?: number;
-
-  recentOrders: RecentOrder[];
-  lowStockProducts: LowStockProduct[];
 }
 
 export type OrderStatus = "pending" | "processing" | "delivered" | "cancelled";

@@ -8,13 +8,13 @@ import { Product } from "@/app/types/Product";
 interface CategoryRowProps {
   category: string;
   products: Product[];
-  onAddToCart?: (product: Product) => void;
+  onAddToWishlist?: (product: Product) => void;
 }
 
 export default function CategoryRow({
   category,
   products,
-  onAddToCart,
+  onAddToWishlist,
 }: CategoryRowProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -60,7 +60,7 @@ export default function CategoryRow({
       >
         {products.map((product) => (
           <div key={product._id} style={{ scrollSnapAlign: "start" }}>
-            <ProductCard product={product} onAddToCart={onAddToCart} />
+            <ProductCard product={product} onAddToWishlist={onAddToWishlist} />
           </div>
         ))}
       </div>

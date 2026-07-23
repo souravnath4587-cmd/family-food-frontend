@@ -19,10 +19,11 @@ export async function getAdminStats(): Promise<AdminStats> {
     cache: "no-store",
   });
 
+  const data = await res.json();
+
   if (!res.ok) {
-    throw new Error("Failed to load overview stats.");
+    throw new Error(data.message || "Failed to load admin stats.");
   }
 
-  const data = await res.json();
-  return data.data ?? data;
+  return data.data;
 }

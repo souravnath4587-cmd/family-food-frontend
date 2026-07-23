@@ -7,12 +7,17 @@ import CategoryNav from "../components/products/Categorynav";
 import CategoryRow from "../components/products/Categoryrow";
 import ProductsPageSkeleton from "../components/products/Productspageskeleton";
 import { Product } from "../types/Product";
+import { addToWishlist } from "../lib/api/cart";
+import { authClient } from "../lib/auth-client";
+import { toast } from "react-toastify";
 
 // Categories appear in this order first, anything else found in the
 // data is appended alphabetically after.
 const PREFERRED_ORDER = ["Chanachur", "Nimki", "Anguli"];
 
 export default function ProductsPage() {
+  const { data: session } = authClient.useSession();
+  const userId = session?.user.id;
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -54,11 +59,23 @@ export default function ProductsPage() {
     }));
   }, [products]);
 
-  function handleAddToCart(product: Product) {
-    // Wire this up to your actual cart logic (context, Zustand, API call, etc.)
-    console.log("Add to cart:", product._id);
-  }
+  const handleAddToWishlist = async (product: Product) => {
+    try {
+      if (!userId) {
+        console.log("Please login first");
+        return;
+      }
 
+      const data = await addToWishlist(userId, product._id);
+
+      if (data) {
+        toast.success(data.message);
+      }
+      console.log("Wishlist added:", data);
+    } catch (error) {
+      console.error("Wishlist error:", error);
+    }
+  };
   return (
     <div className="min-h-screen bg-[#0F0F0F] px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -105,7 +122,7 @@ export default function ProductsPage() {
                   key={category}
                   category={category}
                   products={items}
-                  onAddToCart={handleAddToCart}
+                  onAddToWishlist={handleAddToWishlist}
                 />
               ))}
             </div>

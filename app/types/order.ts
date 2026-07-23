@@ -28,7 +28,6 @@ export interface OrderItem {
 export interface Order {
   _id: string;
   userId: string;
-
   customer: {
     fullName: string;
     phone: string;

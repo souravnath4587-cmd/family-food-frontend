@@ -9,7 +9,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useState } from "react";
-import { FiShoppingCart, FiPackage } from "react-icons/fi";
+import { FiPackage } from "react-icons/fi";
+import { GiSelfLove } from "react-icons/gi";
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -24,12 +25,12 @@ const SPICY_STYLES: Record<string, string> = {
 
 interface ProductCardProps {
   product: Product;
-  onAddToCart?: (product: Product) => void;
+  onAddToWishlist?: (product: Product) => void;
 }
 
 export default function ProductCard({
   product,
-  onAddToCart,
+  onAddToWishlist,
 }: ProductCardProps) {
   const [imgError, setImgError] = useState(false);
   const imageUrl = resolveProductImage(product);
@@ -49,8 +50,8 @@ export default function ProductCard({
     "bg-white/5 text-gray-300 ring-white/10";
 
   return (
-    <Link
-      href={`/products/${product._id}`}
+    <div
+      // href={`/products/${product._id}`}
       className="flex w-56 shrink-0 flex-col overflow-hidden rounded-xl border border-white/10 bg-[#18181B] shadow-lg transition-transform duration-200 hover:-translate-y-1 hover:border-white/20 sm:w-64"
     >
       {/* Image */}
@@ -132,15 +133,20 @@ export default function ProductCard({
           </div>
 
           <button
-            onClick={() => onAddToCart?.(product)}
+            onClick={() => onAddToWishlist?.(product)}
             disabled={isOutOfStock}
-            aria-label={`Add ${product.name} to cart`}
+            aria-label={`Add ${product.name} to WishList`}
             className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-500 text-black transition-colors duration-150 hover:bg-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/50 disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-gray-600"
           >
-            <FiShoppingCart className="h-4 w-4" />
+            <GiSelfLove className="h-4 w-4" />
           </button>
         </div>
       </div>
-    </Link>
+      <Link href={`/products/${product._id}`} className="">
+        <button className="btn btn-warning w-full text-black ">
+          View Products
+        </button>
+      </Link>
+    </div>
   );
 }
