@@ -287,12 +287,6 @@ export default function ViewProductPage({ id }: ViewProductPageProps) {
             ? {
                 _id: product._id,
                 name: product.name,
-                image: images[0] ?? "",
-                category: product.category,
-                price: product.price,
-                stock: product.stockQuantity,
-                status,
-                createdAt: product.createdAt ?? new Date().toISOString(),
               }
             : null
         }

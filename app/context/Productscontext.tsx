@@ -7,14 +7,15 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { PRODUCTS } from "../lib/mock-data";
 import { Product } from "../types/Product";
+import { getProducts } from "../lib/api/Products";
 
 interface ProductsContextValue {
   products: Product[];
   bestSellers: Product[];
   isLoading: boolean;
   error: string | null;
+  refetchProducts: () => Promise<void>;
 }
 
 const ProductsContext = createContext<ProductsContextValue | undefined>(
@@ -26,36 +27,44 @@ export function ProductsProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    async function loadProducts() {
+  const loadProducts = async () => {
+    try {
       setIsLoading(true);
       setError(null);
-      try {
-        // TODO: replace with a real fetch, e.g.
-        // const res = await fetch("/api/products");
-        // const data = await res.json();
-        await new Promise((resolve) => setTimeout(resolve, 700));
-        if (!cancelled) setProducts(PRODUCTS);
-      } catch {
-        if (!cancelled) setError("Couldn't load products. Please try again.");
-      } finally {
-        if (!cancelled) setIsLoading(false);
-      }
-    }
 
+      const data = await getProducts();
+
+      setProducts(data);
+    } catch (error) {
+      console.error("Failed to load products:", error);
+
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Couldn't load products. Please try again.",
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
     loadProducts();
-    return () => {
-      cancelled = true;
-    };
   }, []);
 
-  const bestSellers = products.filter((p) => p.isBestSeller);
+  const bestSellers = products.filter(
+    (product) => product.isBestSeller === true,
+  );
 
   return (
     <ProductsContext.Provider
-      value={{ products, bestSellers, isLoading, error }}
+      value={{
+        products,
+        bestSellers,
+        isLoading,
+        error,
+        refetchProducts: loadProducts,
+      }}
     >
       {children}
     </ProductsContext.Provider>
@@ -63,9 +72,11 @@ export function ProductsProvider({ children }: { children: ReactNode }) {
 }
 
 export function useProducts() {
-  const ctx = useContext(ProductsContext);
-  if (!ctx) {
+  const context = useContext(ProductsContext);
+
+  if (!context) {
     throw new Error("useProducts must be used within a ProductsProvider");
   }
-  return ctx;
+
+  return context;
 }

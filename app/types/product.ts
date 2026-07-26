@@ -18,6 +18,9 @@ export interface Product {
   spicyLevel: "mild" | "medium" | "hot" | string;
   ageRecommendation: string;
   updatedAt?: string;
+
+  isBestSeller?: boolean;
+  reviews?: Review[];
 }
 
 export interface Category {
@@ -105,15 +108,32 @@ export function getStockStatus(stockQuantity: number): StockStatus {
  * placeholder instead of a broken <img>.
  */
 export function resolveProductImage(product: Product): string | null {
+  // type ImageValue =
+  // | string
+  // | {
+  //     previewUrl?: string;
+  //     url?: string;
+  //   };
+
   const first = product.images?.[0];
+  // const first: ImageValue | undefined = product.images?.[0];
 
   if (typeof first === "string" && first.trim()) {
     return first;
   }
 
-  if (first && typeof first === "object" && first.previewUrl) {
-    return first.previewUrl;
-  }
+  // if (
+  //   first &&
+  //   typeof first === "object" &&
+  //   "previewUrl" in first &&
+  //   first.previewUrl
+  // ) {
+  //   return first.previewUrl;
+  // }
+
+  // if (first && typeof first === "object" && first.previewUrl) {
+  //   return first.previewUrl;
+  // }
 
   if (product.image && product.image.trim()) {
     return product.image;

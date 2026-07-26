@@ -38,7 +38,7 @@ const SPICY_STYLES: Record<string, string> = {
 
 interface ProductDetailPageProps {
   id: string;
-  userId: string;
+  // userId: string;
 }
 
 export default function ProductDetailPage({ id }: ProductDetailPageProps) {
@@ -121,8 +121,10 @@ export default function ProductDetailPage({ id }: ProductDetailPageProps) {
     try {
       const data = await addToCart(product._id, quantity, userId as string);
 
-      toast.success(`Product added to cart : ${product._id}`);
-      router.refresh();
+      if (data) {
+        toast.success(`Product added to cart : ${product._id}`);
+        router.refresh();
+      }
 
       // Toast
       // toast.success("Product added to cart!");

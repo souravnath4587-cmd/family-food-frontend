@@ -72,7 +72,7 @@ export default function ProductsPage() {
         toast.success(data.message);
       }
     } catch (error) {
-      toast.error(error.message);
+      console.log(error);
     }
   };
   return (
