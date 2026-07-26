@@ -1,6 +1,6 @@
 "use client";
 
-import { Product, ProductFormValues } from "@/app/types/Product";
+import { Product, ProductFormValues } from "@/app/types/product";
 import { FormEvent, useEffect, useState } from "react";
 import { FiX } from "react-icons/fi";
 

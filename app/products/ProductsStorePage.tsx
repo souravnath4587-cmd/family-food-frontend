@@ -6,7 +6,7 @@ import { getProducts } from "../lib/api/Products";
 import CategoryNav from "../components/products/Categorynav";
 import CategoryRow from "../components/products/Categoryrow";
 import ProductsPageSkeleton from "../components/products/Productspageskeleton";
-import { Product } from "../types/Product";
+import { Product } from "../types/product";
 import { addToWishlist } from "../lib/api/cart";
 import { authClient } from "../lib/auth-client";
 import { toast } from "react-toastify";

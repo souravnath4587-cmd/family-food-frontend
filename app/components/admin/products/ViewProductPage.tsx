@@ -14,7 +14,7 @@ import {
   FiPercent,
 } from "react-icons/fi";
 
-import { getStockStatus, ProductDetail } from "@/app/types/Product";
+import { getStockStatus, ProductDetail } from "@/app/types/product";
 import { deleteProduct, getProductById } from "@/app/lib/api/Products";
 import StatusBadge from "./Statusbadge";
 import DeleteModal from "./Deletemodal";

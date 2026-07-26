@@ -1,4 +1,4 @@
-import { Product } from "@/app/types/Product";
+import { Product } from "@/app/types/product";
 import Link from "next/link";
 import { FiEye, FiEdit2, FiTrash2 } from "react-icons/fi";
 

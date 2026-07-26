@@ -1,6 +1,6 @@
 // import type { Category, FaqItem, Product, Review } from
 
-import { Category, FaqItem, Review } from "../types/Product";
+import { Category, FaqItem, Review } from "../types/product";
 
 // NOTE: swap this file for real API calls / a DB query layer once your
 // product catalog endpoints exist. Shapes match what the UI expects.

@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FiSearch, FiPlus, FiChevronDown } from "react-icons/fi";
 
-import { Product, ProductFormValues, SortOption } from "@/app/types/Product";
+import { Product, ProductFormValues, SortOption } from "@/app/types/product";
 import {
   deleteProduct,
   getProducts,

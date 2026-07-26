@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ProductCard from "./Productcard";
-import { Product } from "@/app/types/Product";
+import { Product } from "@/app/types/product";
 
 interface CategoryRowProps {
   category: string;

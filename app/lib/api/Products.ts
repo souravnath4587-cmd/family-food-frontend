@@ -1,4 +1,4 @@
-import { Product, ProductFormValues } from "@/app/types/Product";
+import { Product, ProductFormValues } from "@/app/types/product";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 

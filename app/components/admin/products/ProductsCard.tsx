@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Product } from "@/app/types/Product";
+import { Product } from "@/app/types/product";
 import StatusBadge from "./Statusbadge";
 import ActionButtons from "./Actionbuttons";
 

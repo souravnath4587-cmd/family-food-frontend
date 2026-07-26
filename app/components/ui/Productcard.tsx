@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FiHeart } from "react-icons/fi";
 import { GiChiliPepper } from "react-icons/gi";
 
-import { Product } from "@/app/types/Product";
+import { Product } from "@/app/types/product";
 import { useFavorites } from "@/app/context/FavoritesContext";
 
 const SPICE_LABEL: Record<string, string> = {

@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { Product } from "../types/Product";
+import { Product } from "../types/product";
 import { getProducts } from "../lib/api/Products";
 
 interface ProductsContextValue {

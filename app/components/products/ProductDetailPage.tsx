@@ -16,7 +16,7 @@ import {
   getPriceInfo,
   Product,
   resolveProductImage,
-} from "@/app/types/Product";
+} from "@/app/types/product";
 import { getProductById } from "@/app/lib/api/Products";
 import QuantitySelector from "./Quantityselector";
 import Image from "next/image";

@@ -4,7 +4,12 @@ import {
   getAvailableStock,
   Product,
   resolveProductImage,
-} from "@/app/types/Product";
+} from "@/app/types/product";
+// import {
+//   getAvailableStock,
+//   Product,
+//   resolveProductImage,
+// } from "@/app/types/Product";
 import Image from "next/image";
 import Link from "next/link";
 

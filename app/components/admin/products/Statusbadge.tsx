@@ -1,6 +1,6 @@
 // import { Product } from "@/types/product";
 
-import { Product } from "@/app/types/Product";
+import { Product } from "@/app/types/product";
 
 const STATUS_STYLES: Record<Product["status"], string> = {
   "In Stock": "bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/30",
