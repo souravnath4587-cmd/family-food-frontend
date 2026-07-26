@@ -6,11 +6,11 @@ export interface Product {
   slug: string;
   description: string;
   shortDescription: string;
-  images?: ProductImage[];
+  images?: string[];
   image: string;
   category: string;
   price: number;
-  discountPrice?: number;
+  discountPrice: number;
   stockQuantity: number;
   stock: number;
   ingredients: string[];
@@ -73,7 +73,7 @@ export interface ProductDetail {
   slug: string;
   description: string;
   shortDescription: string;
-  images: string[];
+  images?: string[];
   category: string;
   price: number;
   discountPrice: number;
