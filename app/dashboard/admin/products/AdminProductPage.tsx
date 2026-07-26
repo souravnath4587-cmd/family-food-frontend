@@ -154,11 +154,6 @@ export default function AdminProductsPage() {
         prev.map((p) => (p._id === id ? { ...p, ...updated } : p)),
       );
     } else {
-      // Adding a product depends on your create-product endpoint.
-      // Wire this up to POST http://localhost:5000/api/products
-      // once that route is available, then refresh the list:
-      // const created = await createProduct(values);
-      // setProducts((prev) => [created, ...prev]);
       await loadProducts();
     }
   }

@@ -1,5 +1,6 @@
 "use client";
 
+import { postProducts } from "@/app/lib/api/Products";
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import {
   FiBox,
@@ -134,25 +135,21 @@ export default function AddProductPage() {
 
     setIsSaving(true);
     try {
-      // TODO: await fetch("/api/admin/products", { method: "POST", body: JSON.stringify(payload) })
-      const res = await fetch("http://localhost:5000/api/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      res.json();
+      const data = await postProducts(payload);
 
-      if (res) {
-        toast.success("add successfull.");
-      } else {
-        toast.error("something getting wrong..");
-      }
-      console.log("Product payload", payload);
-      await new Promise((resolve) => setTimeout(resolve, 800));
-    } catch {
-      setError("Something went wrong saving this product. Try again.");
+      toast.success("Product added successfully.");
+
+      console.log("Product response:", data);
+    } catch (error) {
+      console.error("Error adding product:", error);
+
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong saving this product. Try again.",
+      );
+
+      toast.error("Something went wrong.");
     } finally {
       setIsSaving(false);
     }

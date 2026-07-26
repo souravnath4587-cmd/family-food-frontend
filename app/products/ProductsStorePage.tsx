@@ -71,9 +71,8 @@ export default function ProductsPage() {
       if (data) {
         toast.success(data.message);
       }
-      console.log("Wishlist added:", data);
     } catch (error) {
-      console.error("Wishlist error:", error);
+      toast.error(error.message);
     }
   };
   return (

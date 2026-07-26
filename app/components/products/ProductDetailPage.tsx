@@ -23,6 +23,7 @@ import Image from "next/image";
 import StockBadge from "./Stockbadge";
 import { addToCart } from "@/app/lib/api/cart";
 import { authClient } from "@/app/lib/auth-client";
+import { toast } from "react-toastify";
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -120,7 +121,8 @@ export default function ProductDetailPage({ id }: ProductDetailPageProps) {
     try {
       const data = await addToCart(product._id, quantity, userId as string);
 
-      console.log("Product added to cart:", data);
+      toast.success(`Product added to cart : ${product._id}`);
+      router.refresh();
 
       // Toast
       // toast.success("Product added to cart!");

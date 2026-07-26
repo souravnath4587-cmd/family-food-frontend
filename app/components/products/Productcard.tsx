@@ -112,6 +112,9 @@ export default function ProductCard({
           <span className="rounded-full bg-white/5 px-2 py-0.5 text-[11px] text-gray-300 ring-1 ring-white/10">
             {product.weight}
           </span>
+          <span className="rounded-full bg-white/5 px-2 py-0.5 text-[11px] text-gray-300 ring-1 ring-white/10">
+            {product.stockQuantity}
+          </span>
         </div>
 
         <div className="mt-auto flex items-end justify-between pt-3">
